@@ -10,6 +10,7 @@ import { AuthController } from './auth.controller';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guard';
 
 @Module({
   controllers: [AuthController],
@@ -30,6 +31,10 @@ import { APP_GUARD } from '@nestjs/core';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })
